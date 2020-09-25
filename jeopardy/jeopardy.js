@@ -84,7 +84,7 @@ async function fillTable() {
   for (let clueIdx = 0; clueIdx < numCluesPerCat; clueIdx++) {
     let $tr = $("<tr>");
     for (let catIdx = 0; catIdx < numCategories; catIdx++) {
-      $tr.append($("<td>").attr("id", `${catIdx}-${clueIdx}`).text("?"));
+      $tr.append($("<td>").attr("id", `${catIdx}-${clueIdx}`).html("<i class='fas fa-question fa-spin fa-2x'></i>"));
     }
     $("#jeopardy tbody").append($tr);
   }
@@ -99,34 +99,41 @@ async function fillTable() {
  * */
 
 function handleClick(evt) {
-  let id = evt.target.id;
-  let [catId, clueId] = id.split("-");
-  let clue = categories[catId].clues[clueId];
- // clue = {question:"xxx", answer:'xxx': showing:null}
-
-  let msg;
-
-  if (!clue.showing) {
-    msg = clue.question;
-    clue.showing = "question";
-    //Update clue box
-    let $recentClue = $( "#recent-clue" ); 
-    $recentClue.html(msg);
-  } else if (clue.showing === "question") {
-    msg = clue.answer;
-    clue.showing = "answer";
+  //distinguish between click on TD and click on questionmark icon
+  let id;
+  if (evt.target.tagName === 'TD') {
+    id = evt.target.id;
   } else {
-    // already showing answer; ignore
-    //Update clue box to display text of clicked
-    let clickedClueText = clue.question;
-    let $clickedClue = $( "#recent-clue" ); 
-    $clickedClue.html(clickedClueText);
-    
+    id = evt.target.parentElement.id;
   }
-
-  // Update text of cell
-  $(`#${catId}-${clueId}`).html(msg);
-}
+    //logic for both TD and Icon click event
+    let [catId, clueId] = id.split("-");
+    let clue = categories[catId].clues[clueId];
+   // clue = {question:"xxx", answer:'xxx': showing:null}
+  
+    let msg;
+  
+    if (!clue.showing) {
+      msg = clue.question;
+      clue.showing = "question";
+      //Update clue box
+      let $recentClue = $( "#recent-clue" ); 
+      $recentClue.html(msg);
+    } else if (clue.showing === "question") {
+      msg = clue.answer;
+      clue.showing = "answer";
+    } else {
+      // already showing answer; ignore
+      //Update clue box to display text of clicked
+      let clickedClueText = clue.question;
+      let $clickedClue = $( "#recent-clue" ); 
+      $clickedClue.html(clickedClueText);
+      
+    }
+  
+    // Update text of cell
+    $(`#${catId}-${clueId}`).html(msg);
+  } 
 
 /** Start game:
  *
