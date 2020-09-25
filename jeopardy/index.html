@@ -25,18 +25,22 @@
                         </table>
                   </div>
                   <div class="col-md-4 mt-5">
-                        <h3>Concepts used:</h3>
+                        <div class="clue-container">
+                              <h3>Clue</h3>
+                              <div id="recent-clue">The most recent clue will be displayed here.</div>
+                        </div>
+                        <h3>Demonstrates Understanding of</h3>
                         <ul>
                               <li>AJAX requests using Axios</li>
-                              <li>Jeopardy's public API</li>
+                              <li>APIs (Jeopardy's public API)</li>
                               <li>DOM Manipulation using jQuery</li>
                               <li>Advanced array methods & nested loops</li>
                         </ul>
-                        <h3>Workflow</h3>
+                        <h3>JavaScript Workflow</h3>
                         <ul>
                               <li>Restart button triggers request to API</li>
                               <li>6 random categories are picked using Lodash, their IDs are used to obtain 5 random clues</li>
-                              <li>Table is generated via DOM Manipulation with jQuery using nested loops. Clue and category IDs are retained in cell ID. These are used to access corresponsing clue.</li>
+                              <li>Table is generated via DOM Manipulation with jQuery using nested loops. Clue and category IDs are retained in cell ID, so they can be used to access corresponding clue</li>
                               <li>Event listener added to cells which displays clue and answer respectively upon click</li>
                         </ul>
                               <div class="row justify-content-center">

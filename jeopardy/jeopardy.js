@@ -109,12 +109,19 @@ function handleClick(evt) {
   if (!clue.showing) {
     msg = clue.question;
     clue.showing = "question";
+    //Update clue box
+    let $recentClue = $( "#recent-clue" ); 
+    $recentClue.html(msg);
   } else if (clue.showing === "question") {
     msg = clue.answer;
     clue.showing = "answer";
   } else {
     // already showing answer; ignore
-    return
+    //Update clue box to display text of clicked
+    let clickedClueText = clue.question;
+    let $clickedClue = $( "#recent-clue" ); 
+    $clickedClue.html(clickedClueText);
+    
   }
 
   // Update text of cell
